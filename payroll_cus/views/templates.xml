@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>    
+    <template id="report_assets_common1" name="payroll_cus" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">  
+            <link rel="stylesheet" type="text/scss" href="/payroll_cus/static/src/scss/payment_voucher.scss"/>
+        </xpath>
+    </template>
+
+    <template id="cnps_summary">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="page1">
+                            <p class="text-center titre_bul"><strong>E-Ment Business Consulting, contributions CNPS</strong></p>
+                            <div class="container">
+                                <div class="row ligne">
+                                    <div class="col-6"></div>
+                                    <div class="col-2" style="text-transform: uppercase;" t-if="o.number">Number : </div>
+                                    <div class="col-4 text-left" align="left"><strong class="text-right" style="text-transform: uppercase;" t-field="o.number"/></div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col-6"></div>
+                                    <div class="col-2" style="text-transform: uppercase;" t-if="o.start_date">Date : </div>
+                                    <div class="col-4 text-left" style="text-transform: uppercase;" align="left"><strong class="text-right" t-field="o.start_date"/> - <strong class="text-right" t-field="o.end_date"/></div>
+                                </div>
+                            </div>
+                            
+                            <br/>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left">MATRICULES</th>
+                                        <th class="text-left">EMPLOYEES</th>
+                                        <th class="text-right">SALAIRE DE BASE</th>
+                                        <th class="text-right">CNPS EMPLOYEES</th>
+                                        <th class="text-right">CNPS EMPLOYEUR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="get_detail(o.line_ids)" t-as="l">
+                                        <t>
+                                            <td align="left">
+                                                <span t-esc="l['code']"/>
+                                            </td>
+                                            <td align="left">
+                                                <span t-esc="l['names']"/>
+                                            </td>
+                                            <td align="right">
+                                                <span t-esc="'{0:,.2f}'.format(l['basic'])"/>
+                                            </td>
+                                            <td align="right">
+                                                <span t-esc="'{0:,.2f}'.format(l['cnps_e'])"/>
+                                            </td>
+                                            <td align="right">
+                                                <span t-esc="'{0:,.2f}'.format(l['cnps_p'])"/>
+                                            </td>
+                                        </t>    
+                                    </tr>
+                                    <tr class="border-black" style="border-bottom: 1px solid black">
+                                        <td colspan="17"/>
+                                    </tr>
+                                </tbody>
+                                <tfooter>
+                                    <tr>
+                                        <td colspan="2" align ="left "><STRONG>TOTAL</STRONG></td>
+                                        <td align="right">
+                                          -  <!-- <span t-esc="'{0:,.2f}'.format(o.basic)"/> -->
+                                        </td>
+                                        <td align="right">
+                                            <span t-esc="'{0:,.2f}'.format(o.cnps_e)"/>
+                                        </td>
+                                        <td align="right">
+                                            <span t-esc="'{0:,.2f}'.format(o.cnps_p)"/>
+                                        </td>
+                                    </tr>
+                                </tfooter>
+                            </table>
+                        </div>                  
+                    </div> 
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>        

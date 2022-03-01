@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_dsn_ursa_tree" model="ir.ui.view">
+            <field name="name">dsn.ursa.tree</field>
+            <field name="model">dsn.ursa</field>
+            <field name="arch" type="xml">
+                <tree string="Dsn Ursa">
+                    <field name="payslip"/>
+                    <field name="liste"/>
+                    <!-- <field name="employee"/>
+                    <field name="date"/> -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_dsn_ursa_form" model="ir.ui.view">
+            <field name="name">dsn.ursa.form</field>
+            <field name="model">dsn.ursa</field>
+            <field name="arch" type="xml">
+                <form string="DSN ursa">
+                    <sheet>
+                        <group>
+                            <group name="right_column">
+                                <field name="payslip" />
+                                <field name="liste" />
+                                <field name="type_decla" />
+                                <field name="number" />
+                                <field name="numero" />
+                                <field name="rais" />
+                                <field name="siret" />
+                                <field name="ape" />
+                                <field name="adress" />
+                            </group>
+                            <group name="left_column">
+                                <field name="desti"/>
+                                <field name="siret_dest"/>
+                                <field name="regime"/>
+                                <field name="employee"/>
+                                <field name="date"/> 
+                            </group>
+                        </group>
+
+                        <group string="URSAF">
+                            <group name="right_column">
+                                <field name="period" />
+                                <field name="gross"/>
+                                <field name="total_c1"/> 
+                                <field name="company_id" invisible="1"/>
+                                <field name="company_currency_id" invisible="1"/>
+                            </group>
+                            <group name="left_column">
+                                <field name="c027" />
+                                <field name="c322" />
+                                <field name="c423" />
+                                <field name="c668" />
+                                <field name="c726" />
+                                <field name="c727" />
+                                <field name="c937" />
+                            </group>
+                        </group>
+
+                        <group string="HUMANIS">
+                            <group name="right_column">
+                                <field name="period" />
+                                <field name="gross"/>
+                                <field name="total_huma"/> 
+                            </group>
+                            <group name="left_column">
+                                <field name="mot_1" />
+                                <field name="mot_2" />
+                                <field name="mot_3" />
+                            </group>
+                        </group>
+                        <group string = "AG2R">
+                            <group>
+                                <field name="total_ag2r" />
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_dsn_ursa" model="ir.actions.act_window">
+            <field name="name">DSN Ursa</field>
+            <field name="res_model">dsn.ursa</field>
+			<field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_dsn_ursa_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                DSN ursa
+              </p><p>
+                DSN ursa.
+              </p>
+            </field>
+        </record>
+
+        <report
+            id="dsn_ursa_report"
+            model="dsn.ursa" 
+            string="Print DSN ursa"
+            report_type="qweb-pdf"
+            name="payroll_cus.dsn_ursa" 
+            file="payroll_cus.dsn_ursa"/>
+
+        <menuitem
+            id="menu_hr_payslip_view_dsn_ursa"
+            name="DSN ursa"
+            parent="hr_payroll.menu_hr_payroll_report"
+            action="action_dsn_ursa"
+            sequence="10"/> 
+
+    </data>
+</odoo>

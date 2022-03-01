@@ -1,0 +1,80 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+  <record id="view_employee_info" model="ir.ui.view">
+      <field name="name">hr.employee.form</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_form"/>
+      <field name="arch" type="xml">
+          <field name="country_id" position="after">
+              <field name="indice" attrs="{'invisible': [('country_id', '!=', 47)]}" /> 
+              <field name="level" attrs="{'invisible': [('country_id', '!=', 47)]}"/>
+              <field name="numsec" attrs="{'invisible': [('country_id', '!=', 47)]}"/>
+              <field name="coef" attrs="{'invisible': [('country_id', '!=', 47)]}"/>
+          </field>
+          <field name="country_id" position="after">
+            <field name="msa" attrs="{'invisible': [('country_id', '=', 47)]}"/>
+            <field name="insee" attrs="{'invisible': [('country_id', '=', 47)]}"/>
+        </field>
+      </field>
+  </record>
+
+  <record model="ir.ui.view" id="employee_payslip_send_mail_form_view">
+    <field name="name">hr.payslip.form</field>
+    <field name="model">hr.payslip</field>
+    <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//header/button[@name='action_print_payslip']" position="before">
+            <button name="send_payslip" string="Send By Email" type="object" class="oe_highlight" states="done"/>
+        </xpath>
+    </field>
+</record>
+
+   <record id="View_contract_struc" model="ir.ui.view">
+      <field name="name">hr.contract.form</field>
+      <field name="model">hr.contract</field>
+      <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+      <field name="arch" type="xml">
+          <field name="date_end" position="after">
+              <field name="anc"/>
+          </field>
+      </field>
+  </record>
+
+    <record id="hr_contract_view_form_l10n_fr_payroll" model="ir.ui.view">
+        <field name="name">hr.contract.view.form.l10n.fr.payroll</field>
+        <field name="model">hr.contract</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="hr_payroll.hr_contract_form_inherit"/>
+        <field name="arch" type="xml">
+            <field name="structure_type_id" position="after">
+                <field name="category"/>
+                <field name="status_pro" attrs="{'invisible': [('company_country_id', '=', 47)]}"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <field name="company_registry" position="after">
+                <field name="convention" attrs="{'invisible': [('country_code', '!=', 'FR')]}"/>
+                <field name="ppms" attrs="{'invisible': [('country_code', '!=', 'FR')]}"/>
+            </field>
+        </field>
+    </record>
+    <record id="view_hr_payslip_form" model="ir.ui.view">
+        <field name="name">hr.payslip.form</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="qualification"/>
+            </field>
+        </field>
+    </record> -->
+  </data>
+</odoo>

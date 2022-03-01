@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="view_paie_form" model="ir.ui.view">
+            <field name="name">paie.form</field>
+            <field name="model">hr.paie</field>
+            <field name="arch" type="xml">
+                <form string="Cotisation Individuelle">
+                    <header>
+                        <!-- <button name="compute"  string="Compute " states="draft" type="object" class="oe_highlight"/> -->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="payslip" />
+                                <field name="liste" />
+                                <label for="employe_id"/>
+                                <div><field name="employe_id"/></div>
+                                <label for="date"/>
+                                <div><field name="date"/></div>
+                                <label for="adresse"/>
+                                <div><field name="adresse"/></div>
+                                <label for="siret"/>
+                                <div><field name="siret"/></div>
+                                <label for="regime_declaration"/>
+                                <div><field name="regime_declaration"/></div>
+                                <label for="type_declaration"/>
+                                <div><field name="type_declaration"/></div>
+                            </group>
+                            <group>
+                                <label for="date_from" string="Date début"/>
+                                <div>
+                                    <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                                </div>
+                                <label for="ordre_declaration"/>
+                                <div><field name="ordre_declaration"/></div>
+                                <label for="code_ape"/>
+                                <div><field name="code_ape"/></div>
+                                <label for="matricule"/>
+                                <div><field name="matricule"/></div>
+                                <label for="insee"/>
+                                <div><field name="insee"/></div>
+                                <label for="nom_usage"/>
+                                <div><field name="nom_usage"/></div>
+                            </group>
+                        </group>
+                    </sheet>
+                    <!-- Chatter -->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_paie_tree" model="ir.ui.view">
+            <field name="name">paie.tree</field>
+            <field name="model">hr.paie</field>
+            <field name="arch" type="xml">
+                <tree string="Cotisation Individuelle">
+                    <field name="payslip" />
+                    <field name="liste" />
+                    <field name="siret"/>
+                    <field name="matricule"/>
+                    <field name="date"/>
+                    <field name="employe_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_paie_filter" model="ir.ui.view">
+            <field name="name">paie.select</field>
+            <field name="model">hr.paie</field>
+            <field name="arch" type="xml">
+                <search string="Search Payslip">
+                    <group>
+                        <field name="employe_id"/>
+                        <filter string="Nom" name="employe_id"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="state" context="{'group_by':'state'}"/>
+                        <separator orientation="vertical" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <!-- <record id="paperformat_landscape" model="report.paperformat">
+            <field name="name">PF Landscape</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>     -->
+
+        <report
+            id="payroll_cus_report"
+            model="hr.paie" 
+            string="Imprimer la cotisation"
+            report_type="qweb-pdf"
+            name="payroll_cus.report_paie" 
+            file="payroll_cus.report_paie"
+            />
+
+
+        <!-- To create view paie-->
+
+        <record model="ir.actions.act_window" id="action_paie">
+          <field name="name">Cotisation Individuelle</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">hr.paie</field>
+          <field name="view_mode">tree,form</field>
+          <field name="search_view_id" ref="payroll_cus.view_paie_filter"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Créer la Cotisation individuelle
+              </p><p>
+                Créer la Cotisation individuelle
+              </p>
+            </field>
+        </record>    
+
+        <record model="ir.actions.act_window.view" id="action_paie_form">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_paie_form"/>
+            <field name="act_window_id" ref="action_paie"/>
+        </record>
+
+        <record id="action_paie_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_paie_tree"/>
+            <field name="act_window_id" ref="action_paie"/>
+        </record>  
+
+        <menuitem 
+            id="menu_action_paie" 
+            name="Cotisation individuelle" 
+            action="action_paie" 
+            parent="hr_payroll.menu_hr_payroll_report" 
+            />       
+                      
+
+    </data>
+
+</odoo>

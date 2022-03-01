@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_cnps_tree" model="ir.ui.view">
+            <field name="name">contribution.cnps.tree</field>
+            <field name="model">contribution.cnps</field>
+            <field name="arch" type="xml">
+                <tree string="CNPS reports">
+                    <field name="number"/>
+                    <field name="name_sub"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="cnps_e"/>
+                    <field name="cnps_p"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_cnps_form" model="ir.ui.view">
+            <field name="name">contribution.cnps.form</field>
+            <field name="model">contribution.cnps</field>
+            <field name="arch" type="xml">
+                <form string="Contribution CNPS Employees et Employeurs">
+                    <header>
+                        <button name="post" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}" string="Post" type="object"/>
+                        <button name="cancel" string="Cancel" type="object" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,posted,cancel"/>
+                    </header>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <div class="oe_title" attrs="{'invisible': [('state', '=', 'draft')]}">
+                            <h1><field name="number"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name_sub" />
+                                <field name="state" />
+                            </group>
+                            <group name="right_column">
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                            <group name="left_column">
+                                <field name="cnps_e"/>                                
+                                <field name="cnps_p"/>   
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Contributions lines">
+                                <field name="line_ids" colspan="4"  nolabel="1">
+                                    <tree  string="CNPS Employees et Patronal" editable="bottom">
+        
+                                        <field name="cnps_id" invisible="1"/>
+                                        <field name="code" />
+                                        <field name="names" />
+                                        <field name="basic"/>
+                                        <field name="cnps_e" sum="Total Contribution Employee"/>
+                                        <field name="cnps_p" sum="Total Contribution Employeur"/>
+                                        
+                                        <!-- Others fields -->
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="company_currency_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Others Info">
+                                <group>
+                                    <field name="company_id" invisible="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_contribution_cnps" model="ir.actions.act_window">
+            <field name="name">Contribution CNPS</field>
+            <field name="res_model">contribution.cnps</field>
+			<field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_cnps_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Contributions CNPS
+              </p><p>
+                Create Contributions CNPS.
+              </p>
+            </field>
+        </record>
+
+        <report
+            id="contribution_cnps_report"
+            model="contribution.cnps" 
+            string="Print CNPS Report"
+            report_type="qweb-pdf"
+            name="payroll_cus.cnps_summary" 
+            file="payroll_cus.cnps_summary"/>
+
+        <menuitem
+            id="menu_hr_payslip_view_submitsheet"
+            name="Contributions"
+            parent="hr_payroll.menu_hr_payroll_report"
+            action="action_contribution_cnps"
+            sequence="10"/> 
+
+        <record id="view_batche_pay" model="ir.ui.view">
+            <field name="name">hr.payslip.run.form</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_validate']" position="after">
+                    <button name="create_cnps" string="CNPS" type="object" states="close"/>
+                    <button string="Send all Payslips by Email" name="action_send_payslips" type="object" attrs="{'invisible': [('state', 'not in', 'close')]}" class="oe_highlight"/>
+                </xpath> 
+                <xpath expr="//button[@name='action_open_payslips']" position="after">
+                    <button name="action_open_cnps" class="oe_stat_button" icon="fa-book" type="object" help="open CNPS" attrs="{'invisible': [('cnps_count', '=', 0)]}">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value"><field name="cnps_count"/></span>
+                            <span class="o_stat_text">CNPS</span>
+                        </div>
+                    </button>
+                </xpath>
+
+                <field name="credit_note" position="after">
+                    <field name="cnps" readonly = '1' />
+                </field>
+            </field>
+
+        </record>
+    </data>
+    
+    
+
+</odoo>

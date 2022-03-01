@@ -1,0 +1,63 @@
+.page1
+{
+    font-size: 12px;
+}
+.bloc1, .bloc2
+{
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.table1 th
+{
+    color: darkgreen;
+}
+.table2 strong
+{
+    text-decoration: underline;
+    color: darkgreen
+}
+th, td
+{
+    border-top: none !important;
+}
+.bloc3
+{
+    text-align: center;
+    background-color: aliceblue;
+    color: darkgreen;
+}
+.bloc4
+{
+    background-color: silver;
+    padding-left: 10px;
+    color: darkgreen;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.bloc5
+{
+    margin-bottom: 3px;
+}
+.table3 thead, .table4 thead, .table5 thead, .table6 thead, .table7 thead, .table8 thead
+{
+    background-color: aliceblue;
+    border: 1px solid black;
+}
+.table3 th, .table3 td, .table4 th, .table4 td, .table5 th, .table5 td, .table6 th, .table6 td, .table7 th, .table7 td, .table8 th, .table8 td
+{
+    border: 1px solid black;
+}
+.bloc8
+{
+    border: 1px solid black;
+    padding: 10px;;
+}
+.bloc8 strong
+{
+    color: darkgreen;
+}
+.prévoyance
+{
+    color: red;
+}

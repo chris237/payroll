@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_assets_common1" name="payroll_cus" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">  
+            <link rel="stylesheet" type="text/scss" href="/payroll_cus/static/src/scss/payment_voucher.scss"/>
+        </xpath>
+    </template>
+
+    <template id="dsn_liste">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="page1">
+                            <p class="text-center titre_bul"><strong>LISTE DES ETABLISSEMENTS (DSN de <span t-field="o.payslip.date_to"/></strong></p>
+                            <br/>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left">Code Dossier</th>
+                                        <th class="text-left">Raison Sociale</th>
+                                        <th class="text-right">N° SIRET</th>
+                                        <th class="text-right">Regime</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <t>
+                                            <td align="left">
+                                                <span t-esc="o.code"/>
+                                            </td>
+                                            <td align="left">
+                                                <span t-esc="o.rais"/>
+                                            </td>
+                                            <td align="right">
+                                                <span t-esc="o.siret"/>
+                                            </td>
+                                            <td align="right">
+                                                <span t-esc="o.regime"/>
+                                            </td>
+                                        </t>    
+                                    </tr>
+                                    <tr class="border-black" style="border-bottom: 1px solid black">
+                                        <td colspan="17"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>                  
+                    </div> 
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

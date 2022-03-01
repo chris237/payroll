@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_common_paie" name="paie_printing" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">  
+            <link rel="stylesheet" type="text/scss" href="/payroll_cus/static/src/scss/report_paie.scss"/>
+        </xpath>
+    </template>
+    <template id="report_paie">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="page1">
+                            <div class="bloc1">
+                                <table class="table1 table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="8" style="text-align:left;">
+                                                <strong class="">Etablissement NEWTECH ET TELECOM (NEW)</strong>
+                                            </th>
+                                            <th colspan="4" style="text-align:right;">
+                                                <strong class="namep">DSN :  <span t-esc="o.date"/></strong>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>SIRET :</td> 
+                                            <td><span t-esc="o.siret"/></td>
+                                            <td>CODE APE :</td>
+                                            <td><span t-esc="o.code_ape"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>Adresse :</td> 
+                                            <td><span t-esc="o.adresse"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>Régime de déclaration :</td> 
+                                            <td><span t-esc="o.regime_declaration"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>Type de déclaration :</td> 
+                                            <td><span t-esc="o.type_declaration"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>Numero d'ordre de déclaration :</td> 
+                                            <td><span t-esc="o.ordre_declaration"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bloc2">
+                                <table class="table2 table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="8" style="text-align:left;">
+                                                <strong class="">Salarié :</strong>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Matricule :</td> 
+                                            <td><span t-esc="o.matricule"/></td>
+                                            <td>N° Insee :</td>
+                                            <td><span t-esc="o.insee"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>Nom :</td> 
+                                            <td><span t-esc="o.employe_id.name"/></td>
+                                            <td>Nom d'usage :</td> 
+                                            <td><span t-esc="o.nom_usage"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>Prénom :</td> 
+                                            <td><span t-esc="o.employe_id.name"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bloc3">Période d'emploi du <span t-esc="o.date_from"/> au <span t-esc="o.date_to"/> (Numéro de contrat : 00000116092021)</div>
+                            <div class="bloc4">Bulletin de salaire du <span t-esc="o.date_from"/> au <span t-esc="o.date_to"/> -Versement le <span t-esc="o.date_to"/></div>
+                            <div class="bloc5">
+                                <table class="table3 table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:left;">Base assujettie</th>
+                                            <th>Date début</th>
+                                            <th>Date fin</th>
+                                            <th>Montant</th>
+                                            <th>Aff. Prév</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>02 &amp;nbsp;&amp;nbsp; Assiette brute plafonnée</td> 
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_assiette_bp"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>03 &amp;nbsp;&amp;nbsp; Assiette brute déplafonnée</td> 
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_assiette_bd"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>07 &amp;nbsp;&amp;nbsp; Assiette des contributiond d'assurance chômage</td> 
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_assiette_cac"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>10 &amp;nbsp;&amp;nbsp; Base brute fiscale</td> 
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_base_bf"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bloc6">
+                                <table class="table4 table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:left;">Composant de Base assujettie</th>
+                                            <th>Base Ass.</th>
+                                            <th>Date début</th>
+                                            <th>Date fin</th>
+                                            <th>Montant</th>
+                                            <th>Aff. Prév</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>01 &amp;nbsp;&amp;nbsp; SMIC retenu pour le calcul des réductions séc.sociale,AF,ch</td> 
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_smic"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>04 &amp;nbsp;&amp;nbsp; Contributions patronales pour financement prévo</td> 
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_contribution_patronale"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>07 &amp;nbsp;&amp;nbsp; Plafond de sécurité sociale appliqué</td> 
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_plafond_sec"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bloc7">
+                                <table class="table5 table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:left;">Cotisation individuelle  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Insee commune</th>
+                                            <th>Organisme</th>
+                                            <th>Base Ass.</th>
+                                            <th>Date début</th>
+                                            <th>Date fin</th>
+                                            <th>Assiette</th>
+                                            <th>Taux en %</th>
+                                            <th>Montant</th>
+                                            <th>Aff. Prév</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>049 &amp;nbsp;&amp;nbsp; Cotisation Allocation de logement (FNAL)</td> 
+                                            <td>1URS_117</td>
+                                            <td>02</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_cotis_all_log"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_cotis_all_log"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_cotis_all_log"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>076 &amp;nbsp;&amp;nbsp; Cotisation Assurance Vieillesse</td> 
+                                            <td>1URS_117</td>
+                                            <td>02</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_cotis_ass_vieil"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_cotis_ass_vieil"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_cotis_ass_vieil"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>001 &amp;nbsp;&amp;nbsp; Exonération de cotisations au titre de l'emploi</td> 
+                                            <td>1URS_117</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_exon_cotis_emp"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_exon_cotis_emp"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_exon_cotis_emp"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>018 &amp;nbsp;&amp;nbsp; Réduction générale des cotisations sécurité sociale</td> 
+                                            <td>1URS_117</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_red_gen_cotis_ss"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_red_gen_cotis_ss"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_red_gen_cotis_ss"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>045 &amp;nbsp;&amp;nbsp; Cotisation Accident du travail</td> 
+                                            <td>1URS_117</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_cotis_acc_travail"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_cotis_acc_travail"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_cotis_acc_travail"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>068 &amp;nbsp;&amp;nbsp; Contribution solidarité autonomie</td> 
+                                            <td>1URS_117</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_contrib_sol_aut"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_contrib_sol_aut"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_contrib_sol_aut"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>074 &amp;nbsp;&amp;nbsp; Cotisation Allocation familial - taux normal</td> 
+                                            <td>1URS_117</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_cotis_all_fam"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_cotis_all_fam"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_cotis_all_fam"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>075 &amp;nbsp;&amp;nbsp; Cotisation Assurance maladie</td> 
+                                            <td>1URS_117</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_cotis_ass_mal"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_cotis_all_fam"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_cotis_ass_mal"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>076 &amp;nbsp;&amp;nbsp; Cotisation Assurance vieillesse</td> 
+                                            <td>1URS_117</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_cotis_ass_vieil"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_cotis_ass_vieil"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_cotis_ass_vieil"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>100 &amp;nbsp;&amp;nbsp; Contribution au financement du dialogue social</td> 
+                                            <td>1URS_117</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_contrib_financ_ds"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_contrib_financ_ds"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_contrib_financ_ds"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>105 &amp;nbsp;&amp;nbsp; Montant de cotisation au régime unifié Agirc-Arrco,</td> 
+                                            <td>3HUMA</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_cotis_reg_unif"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_cotis_reg_unif"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_cotis_reg_unif"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>106 &amp;nbsp;&amp;nbsp; Réduction générale des cotisations patronales</td> 
+                                            <td>3HUMA</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_red_gen_cotis_pat"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_red_gen_cotis_pat"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_red_gen_cotis_pat"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>109 &amp;nbsp;&amp;nbsp; Exo de cotisations salariales de retr. compl. au ti</td> 
+                                            <td>3HUMA</td>
+                                            <td>03</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_exo_cotis_sal"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_exo_cotis_sal"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_exo_cotis_sal"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>040 &amp;nbsp;&amp;nbsp; Cotisation AC : rémunérations brutes aorès déd</td> 
+                                            <td>1URS_117</td>
+                                            <td>07</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_cotis_ac"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_cotis_ac"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_cotis_ac"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                        <tr> 
+                                            <td>048 &amp;nbsp;&amp;nbsp; Cotisation AGS : rémunérations brutes aorès déd</td> 
+                                            <td>1URS_117</td>
+                                            <td>07</td>
+                                            <td><span t-esc="o.date_from"/></td>
+                                            <td><span t-esc="o.date_to"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.g_cotis_ags"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.t_cotis_ags"/></td>
+                                            <td style="text-align:right;"><span t-esc="o.mt_cotis_ags"/></td>
+                                            <td style="text-align:center;">N.C.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bloc8">
+                                <strong>Totaux Etablissement NEWTECH ET TELECOM (NEW)</strong>
+                                <table class="table6 table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="3" style="text-align:left;">Base assujettie</th>
+                                            <th style="text-align:right;">Période courante</th>
+                                            <th style="text-align:right;">Période de rappel</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3">02 &amp;nbsp;&amp;nbsp; Base brute plafonnée</td> 
+                                            <td style="text-align:right;"><span t-esc="o.mt_assiette_bp"/></td>
+                                            <td style="text-align:right;"></td>
+                                        </tr>
+                                        <tr> 
+                                            <td colspan="3">03 &amp;nbsp;&amp;nbsp; Base brute déplafonnée</td> 
+                                            <td style="text-align:right;"><span t-esc="o.mt_assiette_bd"/></td>
+                                            <td style="text-align:right;"></td>
+                                        </tr>
+                                        <tr> 
+                                            <td colspan="3">07 &amp;nbsp;&amp;nbsp; Assiette des contributions d'assurance chômage</td> 
+                                            <td style="text-align:right;"><span t-esc="o.mt_assiette_cac"/></td>
+                                            <td style="text-align:right;"></td>
+                                        </tr>
+                                        <tr> 
+                                            <td colspan="3">10 &amp;nbsp;&amp;nbsp; Base brute fiscale</td> 
+                                            <td style="text-align:right;"><span t-esc="o.mt_base_bf"/></td>
+                                            <td style="text-align:right;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table7 table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:left;">Composant de Base assujettie &amp;nbsp;&amp;nbsp; <span class="prévoyance">Prévoyance : hors rappel, est conservé la 1ère affiliation où le composant est calculé</span></th>
+                                            <th style="text-align:right;">Période courante</th>
+                                            <th style="text-align:right;">Période de rappel</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>01 &amp;nbsp;&amp;nbsp; SMIC retenu pour le calcul des réductions séc.sociale,AF,ch</td> 
+                                            <td style="text-align:right;"><span t-esc="o.mt_smic"/></td>
+                                            <td style="text-align:right;"></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>04 &amp;nbsp;&amp;nbsp; Contributions patronales pour financement prévo</td> 
+                                            <td style="text-align:right;"><span t-esc="o.mt_contribution_patronale"/></td>
+                                            <td style="text-align:right;"></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>07 &amp;nbsp;&amp;nbsp; Plafond de sécurité sociale appliqué</td> 
+                                            <td style="text-align:right;"><span t-esc="o.mt_plafond_sec"/></td>
+                                            <td style="text-align:right;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table8 table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:left;">Cotisation individuelle</th>
+                                            <th colspan="2" style="text-align:center;">Période courante</th>
+                                            <th colspan="2" style="text-align:center;">Période de rappel</th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th style="text-align:center;border-right:none;">Assiette</th>
+                                            <th style="text-align:center;border-left:none;">Cotisation</th>
+                                            <th style="text-align:center;border-right:none;">Assiette</th>
+                                            <th style="text-align:center;border-left:none;">Cotisation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr> 
+                                            <td>001-Exonération de cotisations au titre de l'emploi</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_exon_cotis_emp"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_exon_cotis_emp"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_exon_cotis_emp"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_exon_cotis_emp"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>018-Réduction générale des cotisations sécurité sociale</td>
+                                            <td style="text-align:center;"><span t-esc="o.g_red_gen_cotis_ss"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_red_gen_cotis_ss"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_red_gen_cotis_ss"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_red_gen_cotis_ss"/></td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>040-Cotisation AC : rémunérations brutes aorès déd</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ac"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ac"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ac"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ac"/></td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>045-Cotisation Accident du travail</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_acc_travail"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_acc_travail"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_acc_travail"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_acc_travail"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>048-Cotisation AGS : rémunérations brutes aorès déd</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ags"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ags"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ags"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ags"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>049-Cotisation Allocation de logement (FNAL)</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_all_log"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_all_log"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_all_log"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_all_log"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>068-Contribution solidarité autonomie</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_contrib_sol_aut"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_contrib_sol_aut"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_contrib_sol_aut"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_contrib_sol_aut"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>074-Cotisation Allocation familial - taux normal</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_all_fam"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_all_fam"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_all_fam"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_all_fam"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>075-Cotisation Assurance maladie</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ass_mal"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ass_mal"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ass_mal"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ass_mal"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>076-Cotisation Assurance Vieillesse TA</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ass_vieil"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ass_vieil"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ass_vieil"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ass_vieil"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>076-Cotisation Assurance vieillesse TS</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ass_vieil"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ass_vieil"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_ass_vieil"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_ass_vieil"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>100 &amp;nbsp;&amp;nbsp; Contribution au financement du dialogue social</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_contrib_financ_ds"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_contrib_financ_ds"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_contrib_financ_ds"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_contrib_financ_ds"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>105-Montant de cotisation au régime unifié Agirc-Arrco,</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_reg_unif"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_reg_unif"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_cotis_reg_unif"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_cotis_reg_unif"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>106-Réduction générale des cotisations patronales</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_red_gen_cotis_pat"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_red_gen_cotis_pat"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_red_gen_cotis_pat"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_red_gen_cotis_pat"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>109-Exo de cotisations salariales de retr. compl. au ti</td> 
+                                            <td style="text-align:center;"><span t-esc="o.g_exo_cotis_sal"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_exo_cotis_sal"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.g_exo_cotis_sal"/></td>
+                                            <td style="text-align:center;"><span t-esc="o.mt_exo_cotis_sal"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+
+        
+    </template>
+</odoo>

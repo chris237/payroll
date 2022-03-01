@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payroll_cnps,contribution.cnps,model_contribution_cnps,base.group_user,1,1,1,1
+access_payroll_cnps_line,contribution.cnps.line,model_contribution_cnps_line,base.group_user,1,1,1,1
+access_payroll_dsn_recap,contribution.dsn.recap,model_dsn_recap,base.group_user,1,1,1,1
+access_payroll_dsn_liste,contribution.dsn.liste,model_dsn_liste,base.group_user,1,1,1,1
+access_payroll_dsn_ursa,contribution.dsn.ursa,model_dsn_ursa,base.group_user,1,1,1,1
+access_hr_paie_user,hr.paie,model_hr_paie,base.group_user,1,1,1,1
